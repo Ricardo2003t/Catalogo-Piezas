@@ -293,12 +293,29 @@ const fuzzyScore = (p, query) => {
   words.forEach(w => {
     if (haystack.includes(w)) score += 3;
     else {
-      // Levenshtein simplificado: caracteres en común
       const chars = [...new Set(w.split(''))];
       chars.forEach(c => { if (haystack.includes(c)) score += 0.3; });
     }
   });
   return score;
+};
+
+const getSimilarProducts = query => {
+  const normalizedQuery = normalize(query);
+  const chars = [...new Set(normalizedQuery.split(''))];
+  return productos
+    .map(p => {
+      const haystack = normalize(`${p.nombre} ${p.marca} ${p.modelo.join(' ')} ${p.descripcion}`);
+      let score = 0;
+      chars.forEach(c => { if (haystack.includes(c)) score += 1; });
+      normalizedQuery.split(/\s+/).forEach(w => {
+        if (w.length >= 2 && haystack.includes(w.substring(0, w.length - 1))) score += 3;
+      });
+      return { p, score };
+    })
+    .filter(({ score }) => score > 2)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6);
 };
 
 const filterBySearch = query => {
@@ -307,11 +324,22 @@ const filterBySearch = query => {
     renderCatalogo();
     return;
   }
-  state.filteredProducts = productos
+  const results = productos
     .map(p => ({ p, score: fuzzyScore(p, query) }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score)
     .map(({ p }) => p);
+
+  if (results.length === 0) {
+    const similar = getSimilarProducts(query);
+    if (similar.length > 0) {
+      state.filteredProducts = similar.map(x => x.p);
+      renderCatalogo();
+      showToast('Mostrando productos similares');
+      return;
+    }
+  }
+  state.filteredProducts = results;
   renderCatalogo();
 };
 
@@ -401,19 +429,20 @@ const sentinelObserver = new IntersectionObserver(
 sentinelObserver.observe($('sentinel'));
 
 /* ── RENDER CATÁLOGO ────────────────────────────────────────── */
+let lastSearchQuery = '';
+
 const renderCatalogo = () => {
   state.currentPage = 0;
   $('catalogo-grid').innerHTML = '';
   $('sentinel').style.display  = 'flex';
-  $('no-results').hidden        = true;
 
   $('total-badge').textContent = `${state.filteredProducts.length} pieza${state.filteredProducts.length !== 1 ? 's' : ''}`;
 
   if (!state.filteredProducts.length) {
-    $('no-results').hidden       = false;
     $('sentinel').style.display  = 'none';
     return;
   }
+
   loadNextPage();
 };
 
@@ -603,6 +632,7 @@ const handleSearch = (valor, id) => {
   syncBuscadores(valor, id);
 
   if (!valor.trim()) {
+    lastSearchQuery = '';
     resetFiltersUI();
     pushState({});
     state.filteredProducts = [...productos];
@@ -611,6 +641,7 @@ const handleSearch = (valor, id) => {
   }
 
   searchTimer = setTimeout(() => {
+    lastSearchQuery = valor.trim();
     resetFiltersUI();
     pushState({ q: valor.trim() });
     filterBySearch(valor.trim());
@@ -789,7 +820,18 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
   }
 });
 
-initTheme();
+const resetearBusqueda = () => {
+  ['buscador-desktop', 'buscador-mobile'].forEach(id => {
+    const el = $(id);
+    if (el) el.value = '';
+  });
+  $$('[id^="clear-"]').forEach(b => { if (b) b.hidden = true; });
+  lastSearchQuery = '';
+  resetFiltersUI();
+  pushState({});
+  state.filteredProducts = [...productos];
+  renderCatalogo();
+};
 
 /* ── APPLE MAPS — solo visible en iOS ───────────────────────── */
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||

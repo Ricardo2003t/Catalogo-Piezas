@@ -659,14 +659,6 @@ button, a, [role="button"] {
 .btn-call:hover { filter: brightness(1.06); }
 .btn-call:active { transform: scale(.98); }
 
-/* ── ESTADOS ────────────────────────────────────────────────── */
-#no-results {
-  text-align: center;
-  padding: 56px 24px;
-  font-size: 15px; font-weight: 500;
-  color: var(--text-muted);
-}
-
 #sentinel {
   height: 64px;
   display: flex; align-items: center; justify-content: center;
