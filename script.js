@@ -8,9 +8,9 @@
 /* ── CONFIGURACIÓN ──────────────────────────────────────────── */
 const CONFIG = {
   WA_NUMBER:  'TUNUMERO',       // ← Reemplaza con tu número (código país incluido, sin +)
-  PAGE_SIZE:  8,                // Tarjetas por batch de lazy load
+  PAGE_SIZE:  6,                // Tarjetas por batch de lazy load (óptimo para conexiones lentas)
   SEARCH_DELAY: 280,            // ms debounce búsqueda
-  CAROUSEL_MAX: 6,              // Máx. items en carrusel de ofertas
+  CAROUSEL_MAX: 4,              // Máx. items en carrusel de ofertas
 };
   
 /* ── BASE DE DATOS ──────────────────────────────────────────── */
@@ -151,6 +151,27 @@ const observeLazyImages = () => {
 };
 
 const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f1f5f9' width='400' height='400'/%3E%3C/svg%3E`;
+
+/* ── PRECARGA DE IMÁGENES POR BÚSQUEDA ─────────────────────── */
+const preloadSearchImages = query => {
+  if (!query || query.length < 2) return;
+  const normalized = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const words = normalized.split(/\s+/).filter(Boolean);
+  
+  const toPreload = productos
+    .filter(p => {
+      const haystack = `${p.nombre} ${p.marca} ${p.modelo.join(' ')}`.toLowerCase();
+      return words.some(w => haystack.includes(w));
+    })
+    .slice(0, 6)
+    .flatMap(p => p.imagenes);
+  
+  toPreload.forEach(src => {
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+  });
+};
 
 /* ── HISTORIAL URL ──────────────────────────────────────────── */
 const pushState = (params = {}) => {
@@ -581,6 +602,7 @@ const handleSearch = (valor, id) => {
     resetFiltersUI();
     pushState({ q: valor.trim() });
     filterBySearch(valor.trim());
+    preloadSearchImages(valor.trim());
   }, CONFIG.SEARCH_DELAY);
 };
 
