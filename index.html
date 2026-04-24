@@ -23,9 +23,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="DLG Autopartes" />
   <link rel="manifest" href="manifest.json" />
+  <!-- Fuentes: carga no bloqueante para conexiones lentas -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- media=print + onload = carga async sin bloquear render -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  </noscript>
   <link rel="stylesheet" href="style.css" />
   <script>
     (function(){
@@ -43,7 +49,7 @@
   <div class="header-inner">
     <a class="header-logo" href="/" aria-label="DLG Autopartes — Inicio">
       <img
-        src="DLG Autopartes Logo.webp"
+        src="logo_dlg_clean.webp"
         alt="DLG Autopartes — Especialistas Peugeot"
         class="logo-img"
         width="40" height="40"
@@ -131,9 +137,9 @@
     </li>
     <li>
       <a href="tel:+5352531473" class="menu-link">
-        <img src="Icons/Claro/icons8-phone-50.png"  class="theme-icon icon-light" alt="" aria-hidden="true" width="22" height="22" />
+        <img src="Icons/Oscuro/icons8-phone-50.png"  class="theme-icon icon-light" alt="" aria-hidden="true" width="22" height="22" />
         <img src="Icons/Claro/icons8-phone-50.png" class="theme-icon icon-dark"  alt="" aria-hidden="true" width="22" height="22" />
-        Contactar por teléfono
+        Contactar por Teléfono
       </a>
     </li>
   </ul>

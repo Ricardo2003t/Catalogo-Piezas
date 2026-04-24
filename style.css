@@ -390,8 +390,9 @@ button, a, [role="button"] {
 }
 
 /* ── LAYOUT PRINCIPAL ───────────────────────────────────────── */
+/* FIX: solo header fijo (62px). filters-bar ya ocupa su espacio en el flujo. */
 #main-content {
-  padding-top: var(--page-top);
+  padding-top: var(--header-h);
 }
 
 /* ── SECTION HEADERS ────────────────────────────────────────── */
@@ -728,13 +729,17 @@ button, a, [role="button"] {
 
 .modal-gallery {
   position: relative;
-  width: 100%; aspect-ratio: 4/3;
+  width: 100%;
+  /* FIX: imágenes del catálogo son 1:1, la galería debe ser cuadrada.
+     El 4:3 anterior cortaba arriba/abajo con object-fit:contain. */
+  aspect-ratio: 1 / 1;
   background: var(--bg-elevated);
   overflow: hidden;
 }
 #modal-img {
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--bg-elevated);
   transition: opacity .2s;
 }
 .modal-dots {

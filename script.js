@@ -7,11 +7,21 @@
 
 /* ── CONFIGURACIÓN ──────────────────────────────────────────── */
 const CONFIG = {
-  WA_NUMBER:  'TUNUMERO',       // ← Reemplaza con tu número (código país incluido, sin +)
-  PAGE_SIZE:  6,                // Tarjetas por batch de lazy load (óptimo para conexiones lentas)
-  SEARCH_DELAY: 280,            // ms debounce búsqueda
-  CAROUSEL_MAX: 4,              // Máx. items en carrusel de ofertas
+  WA_NUMBER:    '5352531473',  // ← número real Cuba
+  PAGE_SIZE:    4,             // PERF: 4 tarjetas/batch → menos DOM en 16kbps
+  SEARCH_DELAY: 350,           // ms debounce búsqueda (un poco más en conexiones lentas)
+  CAROUSEL_MAX: 4,
 };
+
+/* ── DETECCIÓN DE CONEXIÓN LENTA ────────────────────────────── */
+const isSlowConnection = (() => {
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (!conn) return false;
+  // saveData activo O velocidad menor a 1Mbps O tipo 2g/slow-2g
+  return conn.saveData ||
+         (conn.effectiveType && ['slow-2g','2g'].includes(conn.effectiveType)) ||
+         (conn.downlink && conn.downlink < 1);
+})();
   
 /* ── BASE DE DATOS ──────────────────────────────────────────── */
 const productos = [
@@ -135,6 +145,8 @@ const buildWAMessage = ({ nombre, marca, modelo, precio }) => {
 };
 
 /* ── LAZY LOAD IMÁGENES ─────────────────────────────────────── */
+// PERF: en conexiones lentas rootMargin pequeño → solo carga lo visible
+// En conexiones rápidas precarga 200px adelante
 const lazyObserver = new IntersectionObserver((entries, obs) => {
   entries.forEach(({ isIntersecting, target }) => {
     if (!isIntersecting) return;
@@ -144,7 +156,7 @@ const lazyObserver = new IntersectionObserver((entries, obs) => {
     target.removeAttribute('data-src');
     obs.unobserve(target);
   });
-}, { rootMargin: '300px 0px', threshold: 0 });
+}, { rootMargin: isSlowConnection ? '50px 0px' : '200px 0px', threshold: 0 });
 
 const observeLazyImages = () => {
   $$('img[data-src]').forEach(img => lazyObserver.observe(img));
