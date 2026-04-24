@@ -249,15 +249,19 @@ button, a, [role="button"] {
 .btn-menu.open .hamburger span:nth-child(2) { opacity: 0; }
 .btn-menu.open .hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Buscador móvil - siempre visible debajo de filtros */
+/* Buscador móvil expandible - debajo de filtros */
 .mobile-search-bar {
+  display: none;
   padding: 10px 14px;
   border-top: 1px solid var(--border);
   background: var(--bg);
 }
+.mobile-search-bar.open {
+  display: block;
+}
 .mobile-search-bar .search-wrap { display: flex; }
 
-/* Desktop: ocultar buscador móvil */
+/* Desktop: ocultar buscador móvil, usar header */
 @media (min-width: 640px) {
   .search-wrap { display: flex; }
   #btn-search-mobile { display: none; }
