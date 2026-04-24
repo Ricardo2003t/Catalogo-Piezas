@@ -249,22 +249,15 @@ button, a, [role="button"] {
 .btn-menu.open .hamburger span:nth-child(2) { opacity: 0; }
 .btn-menu.open .hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Buscador móvil expandible */
+/* Buscador móvil - siempre visible debajo de filtros */
 .mobile-search-bar {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height .3s var(--ease), padding .3s var(--ease);
-  padding: 0 14px;
-  border-top: 1px solid transparent;
-}
-.mobile-search-bar.open {
-  max-height: 64px;
-  padding: 8px 14px 10px;
-  border-top-color: var(--border);
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
 }
 .mobile-search-bar .search-wrap { display: flex; }
 
-/* Desktop: mostrar buscador inline */
+/* Desktop: ocultar buscador móvil */
 @media (min-width: 640px) {
   .search-wrap { display: flex; }
   #btn-search-mobile { display: none; }
