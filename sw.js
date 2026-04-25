@@ -1,8 +1,8 @@
 /* DLG AUTOPARTES - sw.js
    Cache-First para conexiones 5-14kbps */
 
-const CACHE_SHELL = 'dlg-shell-v5';
-const CACHE_IMGS = 'dlg-imgs-v5';
+const CACHE_SHELL = 'dlg-shell-v6';
+const CACHE_IMGS = 'dlg-imgs-v6';
 
 const SHELL_ASSETS = [
   '/',
@@ -51,10 +51,17 @@ self.addEventListener('fetch', e => {
     return;
   }
 
+  // JS → Network-First (siempre obtener versión nueva)
+  if (url.pathname.endsWith('.js')) {
+    e.respondWith(
+      fetch(request).catch(() => caches.match(request))
+    );
+    return;
+  }
+
   // SHELL → Stale-While-Revalidate (más rápido que Network-First)
   if (url.pathname === '/' || 
       url.pathname.endsWith('.css') || 
-      url.pathname.endsWith('.js') ||
       url.pathname.endsWith('.json') ||
       url.pathname.endsWith('.webp')) {
     e.respondWith(
