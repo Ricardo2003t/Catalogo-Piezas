@@ -658,12 +658,18 @@ $('buscador-mobile').addEventListener('keyup', function () {
   handleSearch(this.value, this.id);
 });
 
-// También intentar con input y change por si acaso
-$('buscador-desktop').addEventListener('input', function () {
-  console.log('buscador-desktop input:', this.value);
-});
-$('buscador-desktop').addEventListener('change', function () {
-  console.log('buscador-desktop change:', this.value);
+// Debug sin debounce para verificar si la función funciona
+$('buscador-desktop').addEventListener('keyup', function () {
+  console.log('DEBUG direct search:', this.value);
+  if (this.value.trim()) {
+    const results = productos.filter(p => 
+      p.nombre.toLowerCase().includes(this.value.toLowerCase()) ||
+      p.marca.toLowerCase().includes(this.value.toLowerCase())
+    );
+    console.log('DEBUG results:', results.length);
+    state.filteredProducts = results;
+    renderCatalogo();
+  }
 });
 
 // Botones clear
@@ -720,8 +726,10 @@ $('filters-scroll').addEventListener('click', e => {
 
 /* ── BUSCADOR MÓVIL TOGGLE ──────────────────────────────────── */
 $('btn-search-mobile').addEventListener('click', function () {
+  console.log('btn-search-mobile clicked');
   const bar      = $('mobile-search-bar');
   const isOpen   = bar.classList.toggle('open');
+  console.log('mobile-search-bar open:', isOpen);
   this.setAttribute('aria-expanded', isOpen);
   bar.setAttribute('aria-hidden', !isOpen);
   if (isOpen) setTimeout(() => $('buscador-mobile').focus(), 320);
