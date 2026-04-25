@@ -1,14 +1,14 @@
 /* DLG AUTOPARTES - sw.js
    Cache-First para conexiones 5-14kbps */
 
-const CACHE_SHELL = 'dlg-shell-v6';
-const CACHE_IMGS = 'dlg-imgs-v6';
+const CACHE_SHELL = 'dlg-shell-v7';
+const CACHE_IMGS = 'dlg-imgs-v7';
 
 const SHELL_ASSETS = [
   '/',
   '/index.html',
   '/style.css',
-  '/script.js',
+  '/script.js?v=2',
   '/manifest.json',
   '/logo_dlg_clean.webp'
 ];
