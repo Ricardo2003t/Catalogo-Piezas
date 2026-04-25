@@ -649,11 +649,21 @@ const handleSearch = (valor, id) => {
   }, CONFIG.SEARCH_DELAY);
 };
 
-$('buscador-desktop').addEventListener('input', function () {
+$('buscador-desktop').addEventListener('keyup', function () {
+  console.log('buscador-desktop keyup:', this.value);
   handleSearch(this.value, this.id);
 });
-$('buscador-mobile').addEventListener('input', function () {
+$('buscador-mobile').addEventListener('keyup', function () {
+  console.log('buscador-mobile keyup:', this.value);
   handleSearch(this.value, this.id);
+});
+
+// También intentar con input y change por si acaso
+$('buscador-desktop').addEventListener('input', function () {
+  console.log('buscador-desktop input:', this.value);
+});
+$('buscador-desktop').addEventListener('change', function () {
+  console.log('buscador-desktop change:', this.value);
 });
 
 // Botones clear
