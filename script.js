@@ -5,6 +5,8 @@
 
 'use strict';
 
+console.log('DLG script loaded');
+
 /* ── CONFIGURACIÓN ──────────────────────────────────────────── */
 const CONFIG = {
   WA_NUMBER:    '5352531473',  // ← número real Cuba
@@ -787,8 +789,12 @@ $('scroll-top').addEventListener('click', () =>
 
 /* ── INIT ───────────────────────────────────────────────────── */
 const init = () => {
+  console.log('DLG init started');
+  console.log('btn-search-mobile:', $('btn-search-mobile'));
+  console.log('mobile-search-bar:', $('mobile-search-bar'));
   buildCarousel();
   applyStateFromURL(); // leer URL al cargar (links compartidos)
+  console.log('DLG init complete');
 };
 
 if (document.readyState === 'loading') {
