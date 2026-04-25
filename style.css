@@ -251,13 +251,17 @@ button, a, [role="button"] {
 
 /* Buscador móvil expandible - debajo de filtros */
 .mobile-search-bar {
-  display: none;
-  padding: 10px 14px;
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 14px;
   border-top: 1px solid var(--border);
   background: var(--bg);
+  transition: max-height 0.3s ease, padding 0.3s ease;
 }
 .mobile-search-bar.open {
-  display: block;
+  max-height: 60px;
+  padding: 10px 14px;
 }
 .mobile-search-bar .search-wrap { display: flex; }
 
