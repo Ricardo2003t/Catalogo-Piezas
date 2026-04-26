@@ -11,8 +11,8 @@ console.log('DLG script loaded');
 const CONFIG = {
   WA_NUMBER:    '5352531473',  // ← número real Cuba
   PAGE_SIZE:    4,             // PERF: 4 tarjetas/batch → menos DOM en 16kbps
-  SEARCH_DELAY: 350,           // ms debounce búsqueda (un poco más en conexiones lentas)
-  CAROUSEL_MAX: 4,
+  SEARCH_DELAY: 400,           // ms debounce búsqueda (un poco más en conexiones lentas)
+  CAROUSEL_MAX: 10,
 };
 
 /* ── DETECCIÓN DE CONEXIÓN LENTA ────────────────────────────── */
@@ -68,7 +68,8 @@ const productos = [
   { marca:'peugeot', nombre:'Bomba de Agua TUD5/301', modelo:['tud5','tu5jp4'], tipo:'repuesto', precio:40.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Bomba Agua TUD5 TUD5JP4(301).webp'], descripcion:'Bomba de agua de alta durabilidad para motores TUD5 y TU5JP4.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Brazos Cremallera 301', modelo:['301'], tipo:'repuesto', precio:40.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Brazos Cremallera 301.webp'], descripcion:'Brazos de cremallera de dirección para Peugeot 301. Precisión total en el manejo.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Brazos Cremallera 405', modelo:['405'], tipo:'repuesto', precio:40.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Brazos Cremallera 405.webp'], descripcion:'Brazos de cremallera de dirección específicos para Peugeot 405.', oferta:false, disponible:true },
-  { marca:'peugeot', nombre:'Bujías Precalentamiento', modelo:['xud9'], tipo:'repuesto', precio:35.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Bujias de Precalentamiento XUD9.webp'], descripcion:'Set de bujías para motor diesel XUD9. Garantizan un arranque rápido en frío.', oferta:false, disponible:true },
+  { marca:'peugeot', nombre:'Bujías Precalentamiento', modelo:['xud9'], tipo:'repuesto', precio:35.00, precioOriginal:40.00, imagenes:['Piezas/Peugeot/Bujias de Precalentamiento XUD9.webp'], descripcion:'Set de 4 bujías para motor diesel XUD9. .', oferta:true, disponible:true },
+  {marca:'peugeot', nombre:'Bujía Precalentamiento ', modelo:['xud9'], tipo:'repuesto', precio:10.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Bujia (sola).webp'], descripcion:'Bujía para motor XUD9. Resistencia mejorada para altas temperaturas.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Camisas Cilindro TUD5', modelo:['tud5'], tipo:'repuesto', precio:180.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Camisas TUD5 XUD9 DVV8.webp'], descripcion:'Camisas de cilindro para motor TUD5. Resistencia extrema al desgaste y calor.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Camisas XUD9 / DW8', modelo:['xud9','dw8'], tipo:'repuesto', precio:160.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Camisas TUD5 XUD9 DW8.webp'], descripcion:'Camisas de cilindro para motores XUD9 y DW8. Material de primera calidad OEM.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Cubo de Rueda', modelo:['205','206','207','308','306','307','309','405','406','partner'], tipo:'repuesto', precio:80.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Cubo de Rueda (Peugeo citroent) (foto1) 205 206 207 308 306 307 309 405 406 Partner.webp'], descripcion:'Cubo de rueda compatible con amplia gama de modelos Peugeot y Citroën.', oferta:false, disponible:true },
@@ -100,7 +101,7 @@ const productos = [
   { marca:'peugeot', nombre:'Parrillas 301', modelo:['301'], tipo:'repuesto', precio:140.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Parrillas 301.webp'], descripcion:'Parrilla/rejilla frontal para Peugeot 301. Acabado cromado y resistente.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Radiador 205', modelo:['205'], tipo:'repuesto', precio:100.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Radiador 205.webp'], descripcion:'Radiador refrigerante para Peugeot 205. Mantiene temperatura óptima del motor.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Rodamiento Delantero Universal', modelo:['universal'], tipo:'repuesto', precio:50.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Rodamiento Delantero Universal CITROEN.webp'], descripcion:'Rodamiento de rueda frontal universal para Peugeot y Citroën. Precisión de giro superior.', oferta:false, disponible:true },
-  { marca:'peugeot', nombre:'Rodamiento Delantero', modelo:['405'], tipo:'repuesto', precio:60.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Rodamiento Delantero Universal CITROEN.webp'], descripcion:'Rodamiento delantero para modelo 405. La pareja: 60 USD', disponible: true },
+  { marca:'peugeot', nombre:'Rodamiento Delantero', modelo:['405'], tipo:'repuesto', precio:60.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Rodamiento 405 .webp'], descripcion:'Rodamiento delantero para modelo 405. La pareja: 60 USD', disponible: true },
   { marca:'peugeot', nombre:'Tensor Dinámico XUD9', modelo:['xud9'], tipo:'repuesto', precio:40.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Tensor Dinamico XUD9 (FOTO1).webp'], descripcion:'Tensor dinámico para motor XUD9. Mantiene la tensión correcta de la distribución.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Válvulas XUD9/DW8', modelo:['xud9','dw8'], tipo:'repuesto', precio:50.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Valvulas XUD9 DW8 TUD5.webp'], descripcion:'Set de válvulas para motores XUD9, DW8 y TUD5. Calidad OEM premium.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Válvulas TUD5', modelo:['tud5'], tipo:'repuesto', precio:85.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Valvulas XUD9 DW8 TUD5.webp'], descripcion:'Kit de válvulas para motor TUD5. Fabricadas con precisión de fábrica.', oferta:false, disponible:true }
