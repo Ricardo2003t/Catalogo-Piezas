@@ -10,7 +10,7 @@ console.log('DLG script loaded');
 /* ── CONFIGURACIÓN ──────────────────────────────────────────── */
 const CONFIG = {
   WA_NUMBER:    '5352531473',  // ← número real Cuba
-  PAGE_SIZE:    4,             // PERF: 4 tarjetas/batch → menos DOM en 16kbps
+  PAGE_SIZE:    5,             // PERF: 4 tarjetas/batch → menos DOM en 16kbps
   SEARCH_DELAY: 400,           // ms debounce búsqueda (un poco más en conexiones lentas)
   CAROUSEL_MAX: 10,
 };
