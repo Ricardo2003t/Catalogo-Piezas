@@ -99,16 +99,16 @@ ul, ol { list-style: none; }
 }
 
 .skip-link {
-  position: absolute;
-  top: -100%; left: 16px;
-  background: var(--text);
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 0 0 var(--r-md) var(--r-md);
-  font-size: 14px; font-weight: 600;
-  z-index: 9999;
-  transition: top .2s;
-}
+   position: absolute;
+   top: -100%; left: 16px;
+   background: var(--text);
+   color: var(--bg-card);
+   padding: 10px 18px;
+   border-radius: 0 0 var(--r-md) var(--r-md);
+   font-size: 14px; font-weight: 600;
+   z-index: 9999;
+   transition: top .2s;
+ }
 .skip-link:focus { top: 0; }
 
 :focus-visible {
@@ -580,12 +580,12 @@ button, a, [role="button"] {
   background: rgba(255,255,255,.65);
   display: grid; place-items: center;
 }
-.p-card-no-disp-overlay span {
-  background: var(--text); color: #fff;
-  font-size: 10px; font-weight: 700;
-  padding: 4px 10px; border-radius: var(--r-full);
-  text-transform: uppercase; letter-spacing: .5px;
-}
+ .p-card-no-disp-overlay span {
+   background: var(--text); color: var(--bg-card);
+   font-size: 10px; font-weight: 700;
+   padding: 4px 10px; border-radius: var(--r-full);
+   text-transform: uppercase; letter-spacing: .5px;
+ }
 
 .p-card-body {
   padding: 10px 12px 12px;
@@ -868,19 +868,19 @@ button, a, [role="button"] {
 .btn-wa svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 /* ── TOAST ──────────────────────────────────────────────────── */
-#toast {
-  position: fixed;
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  left: 50%; transform: translateX(-50%) translateY(70px);
-  background: var(--text); color: #fff;
-  padding: 10px 20px; border-radius: var(--r-full);
-  font-size: 13px; font-weight: 600;
-  z-index: 300;
-  opacity: 0; pointer-events: none;
-  white-space: nowrap;
-  transition: transform .3s var(--ease), opacity .3s;
-  min-height: unset; min-width: unset;
-}
+ #toast {
+   position: fixed;
+   bottom: calc(20px + env(safe-area-inset-bottom));
+   left: 50%; transform: translateX(-50%) translateY(70px);
+   background: var(--text); color: var(--bg-card);
+   padding: 10px 20px; border-radius: var(--r-full);
+   font-size: 13px; font-weight: 600;
+   z-index: 300;
+   opacity: 0; pointer-events: none;
+   white-space: nowrap;
+   transition: transform .3s var(--ease), opacity .3s;
+   min-height: unset; min-width: unset;
+ }
 #toast.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
