@@ -94,7 +94,7 @@ const productos = [
   { marca:'peugeot', nombre:'Filtro Petroleo TUD5', modelo:['tud5'], tipo:'filtro', precio:15.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Filtro Petroleo TUD5.webp'], descripcion:'Filtro de combustible para motor TUD5. Protección contra impurezas en el sistema.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Guías Válvulas DW8/XUD9', modelo:['dw8','xud9'], tipo:'repuesto', precio:50.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Guias Valvulas DW8 XUD9.webp'], descripcion:'Guías de válvulas para motores DW8 y XUD9. Material de precisión extrema.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Junta Balancines XUD9', modelo:['xud9'], tipo:'repuesto', precio:10.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Junta de Balancines XUD9 (foto1).webp','Piezas/Peugeot/Junta de Balancines XUD9 (foto2).webp'], descripcion:'Junta de balancines para motor XUD9. Evita fugas de aceite en la culata.', oferta:false, disponible:true },
-  { marca:'peugeot', nombre:'Junta Block Metal TUD5', modelo:['tud5'], tipo:'repuesto', precio:40.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Junta Block Metal TUD5.webp'], descripcion:'Junta de block metal para motor TUD5. Resistencia superior a presión y temperatura.', oferta:false, disponible:true },
+     { marca:'peugeot', nombre:'Junta Block Metal TUD5', modelo:['tud5'], tipo:'repuesto', precio:40.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Junta Block Metal TUD5.webp'], descripcion:'Junta de block metal para motor TUD5. Resistencia superior a presión y temperatura.', oferta:false, disponible:false, disponibleDesde:'14/05/2026' },
   { marca:'peugeot', nombre:'Junta Block Amianto DW8/XUD9', modelo:['dw8','xud9'], tipo:'repuesto', precio:25.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Junta de Block Amianto DVV8 XUD9.webp'], descripcion:'Junta de block amianto para motores DW8 y XUD9. Sellado de larga duración.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Junta Block Amianto TU3', modelo:['t1','tu3'], tipo:'repuesto', precio:25.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Junta de Block Amianto TU3 25 USD .webp'], descripcion:'Junta de block amianto para motores T1 y TU3. Compatibilidad perfecta garantizada.', oferta:false, disponible:true },
   { marca:'peugeot', nombre:'Kit Distribución 301', modelo:['301'], tipo:'correa', precio:95.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Kit Distribucion 301.webp'], descripcion:'Kit completo de distribución para motor 301. Incluye correa, tensores y rodillos.', oferta:false, disponible:true },
@@ -389,12 +389,12 @@ const createCard = p => {
       <div class="p-card-marca">${p.marca}</div>
       <div class="p-card-nombre">${p.nombre}</div>
       <div class="p-card-modelos" title="${p.modelo.join(', ')}">${p.modelo.join(' · ')}</div>
-      <div class="p-card-precio-wrap">${precioHTML}</div>
-      <span class="p-card-disp ${p.disponible ? 'si' : 'no'}" aria-label="${p.disponible ? 'Disponible' : 'No disponible'}">
-        ${p.disponible ? 'Disponible' : 'No Disponible'}
-      </span>
-  
-    </div>
+       <div class="p-card-precio-wrap">${precioHTML}</div>
+       <span class="p-card-disp ${p.disponible ? 'si' : p.disponibleDesde ? 'soon' : 'no'}" aria-label="${p.disponible ? 'Disponible' : p.disponibleDesde ? 'Disponible desde ' + p.disponibleDesde : 'No disponible'}">
+         ${p.disponible ? 'Disponible' : p.disponibleDesde ? 'Disponible a partir del ' + p.disponibleDesde : 'No Disponible'}
+       </span>
+    
+     </div>
   `;
 
   const open = () => openModal(p);
@@ -553,9 +553,10 @@ const openModal = p => {
   // Contenido
   $('modal-marca').textContent = p.marca.charAt(0).toUpperCase() + p.marca.slice(1);
 
-  const dispEl = $('modal-disp');
-  dispEl.textContent = p.disponible ? 'Disponible' : 'No disponible';
-  dispEl.className   = `modal-disponibilidad ${p.disponible ? 'si' : 'no'}`;
+   const dispEl = $('modal-disp');
+   dispEl.textContent = p.disponible ? 'Disponible' : p.disponibleDesde ? 'Disponible a partir del ' + p.disponibleDesde : 'No disponible';
+   dispEl.className   = `modal-disponibilidad ${p.disponible ? 'si' : p.disponibleDesde ? 'soon' : 'no'}`;
+
 
   $('modal-nombre').textContent = p.nombre;
 

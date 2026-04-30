@@ -629,13 +629,15 @@ button, a, [role="button"] {
   margin-top: 6px; align-self: flex-start;
   min-height: unset; min-width: unset;
 }
-.p-card-disp.si { background: var(--green-light); color: var(--green); }
-.p-card-disp.no { background: var(--red-light);   color: var(--red); }
-.p-card-disp::before {
-  content: '';
-  width: 5px; height: 5px; border-radius: 50%;
-  background: currentColor;
-}
+ .p-card-disp.si { background: var(--green-light); color: var(--green); }
+ .p-card-disp.no { background: var(--red-light);   color: var(--red); }
+ .p-card-disp.soon { background: linear-gradient(135deg, var(--orange-light), #fff5e6); color: var(--orange); border: 1.5px solid var(--orange); }
+ .p-card-disp::before {
+   content: '';
+   width: 5px; height: 5px; border-radius: 50%;
+   background: currentColor;
+ }
+ .p-card-disp.soon::before { display: none; }
 
 .btn-call {
   display: flex;
@@ -786,14 +788,16 @@ button, a, [role="button"] {
   min-height: unset; min-width: unset;
 }
 .modal-disponibilidad::before {
-  content: '';
-  width: 6px; height: 6px; border-radius: 50%;
-  background: currentColor;
-}
+   content: '';
+   width: 6px; height: 6px; border-radius: 50%;
+   background: currentColor;
+ }
+ .modal-disponibilidad.soon::before { display: none; }
 .modal-disponibilidad.si { background: var(--green-light); color: var(--green); }
-.modal-disponibilidad.no { background: var(--red-light);   color: var(--red); }
-
-.modal-nombre {
+ .modal-disponibilidad.no { background: var(--red-light);   color: var(--red); }
+ .modal-disponibilidad.soon { background: linear-gradient(135deg, var(--orange-light), #fff5e6); color: var(--orange); border: 1.5px solid var(--orange); }
+ 
+ .modal-nombre {
   font-size: 22px; font-weight: 800;
   letter-spacing: -.5px; line-height: 1.2;
   color: var(--text);
