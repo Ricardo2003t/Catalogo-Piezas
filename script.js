@@ -71,13 +71,13 @@ const buildWAMessage = ({ nombre, marca, modelo, precio }) => {
 };
 
 /* ── COMPARTIR PRODUCTO INDIVIDUAL ──────────────────────────────
-    La URL del producto es /producto/{slug}/ (path-based).
-    Vercel (vercel.json) reescribe esa ruta a la función serverless
-    api/index.js ?producto={slug}, que sirve index.html con las
-    Esto permite que WhatsApp, Facebook y Telegram muestren la vista
-    previa correcta (foto + precio + descripción) sin necesidad de
-    páginas HTML individuales por producto. */
-const getProductShareURL = p => `${CONFIG.SITE_URL}/producto/${p.slug}/`;
+    La URL del producto usa query param (?producto=slug).
+    Vercel sirve index.html como función serverless (api/index.js)
+    que inyecta las metaetiquetas OG al vuelo cuando
+    se accede con ?producto=slug. Así Facebook y WhatsApp
+    muestran la vista previa correcta sin archivos HTML
+    individuales por producto. */
+const getProductShareURL = p => `${CONFIG.SITE_URL}/?producto=${p.slug}`;
 
 const buildShareText = p =>
   `🔧 ${p.nombre}\n💰 ${formatPrice(p.precio)}\n${p.descripcion}`;

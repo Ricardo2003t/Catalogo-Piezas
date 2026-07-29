@@ -1,11 +1,6 @@
 {
   "routes": [
     {
-      "src": "^/producto/([^/]+)/?$",
-      "methods": ["GET"],
-      "dest": "/api/index?producto=$1"
-    },
-    {
       "src": "^/$",
       "methods": ["GET"],
       "dest": "/api/index"

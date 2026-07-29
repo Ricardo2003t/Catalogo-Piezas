@@ -1,29 +1,31 @@
 /* ════════════════════════════════════════════════════════════════
    DLG AUTOPARTES — build-product-pages.js
    ──────────────────────────────────────────────────────────────────
-   Las páginas de producto ya NO se generan como archivos HTML
-   individuales en /producto/{slug}/index.html.
+   Los productos ya NO se generan como archivos HTML individuales.
 
-   En su lugar, Vercel reescribe cualquier petición a
-   /producto/{slug}/ hacia la función serverless api/index.js,
-   que sirve el mismo index.html de la raíz pero inyectando
-   al vuelo las metaetiquetas Open Graph del producto solicitado.
+   El enfoque actual usa una función serverless de Vercel (api/index.js)
+   que sirve index.html en la raíz e inyecta al vuelo las metaetiquetas
+   Open Graph (og:title, og:description, og:image, product:price:amount, etc.)
+   cuando se accede con el query param ?producto=slug.
 
-   Esto significa que al compartir un producto en WhatsApp, Facebook
-   o Telegram, la vista previa mostrará la foto, precio y descripción
-   del producto correcto, sin necesidad de archivos HTML separados.
+   Formato del enlace de un producto:
+     https://catalogo-piezas.vercel.app/?producto=varios-silicona-rtv-0
+
+   Esto permite que WhatsApp, Facebook y Telegram muestren la vista previa
+   correcta (foto, precio y descripción) sin necesidad de páginas HTML
+   separadas ni archivos individuales por producto.
 
    Los slugs de los productos se definen en productos-data.js.
 
    Uso:
      node build-product-pages.js
    Salida:
-     (ninguna — las páginas de producto se sirven mediante
-      la función serverless en tiempo real)
+     (ninguna — esta utilidad solo confirma que el método serverless
+      está activo y los slugs están disponibles)
  ════════════════════════════════════════════════════════════════ */
 
 const productos = require('./productos-data.js');
 
 console.log(`✅ ${productos.length} productos con slugs definidos.`);
-console.log('ℹ️  Las páginas /producto/{slug}/ se sirven dinámicamente via api/index.js');
-console.log('ℹ️  Usa vercel.json para reescribir esas rutas a la función serverless.');
+console.log('ℹ️  Las páginas de producto se sirven dinámicamente via api/index.js');
+console.log('ℹ️  Formato: https://catalogo-piezas.vercel.app/?producto=<slug>');
