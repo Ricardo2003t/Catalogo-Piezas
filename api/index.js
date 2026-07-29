@@ -89,7 +89,7 @@ const injectProductMeta = (html, p) => {
   let result = otherLines.join('\n');
   result = result.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(newTitle)}</title>`);
 
-  const headInsert = staticLines.join('\n') + '\n' + productMetaLines.join('\n');
+  const headInsert = productMetaLines.join('\n');
   result = result.replace('</head>', headInsert + '\n</head>');
 
   return result;
