@@ -30,7 +30,7 @@ const buildMetaTags = (p) => {
   const image = `${SITE_URL}/${encodeURI(p.imagenes[0])}`;
   const title = `${p.nombre} \u2014 ${formatPrice(p.precio)} | DLG Autopartes`;
   const description = truncate(p.descripcion, 200);
-  const url = `${SITE_URL}/?producto=${p.slug}`;
+  const url = `${SITE_URL}/producto/${p.slug}/`;
   const price = p.precio;
 
   return `  <meta property="og:type" content="product" />
