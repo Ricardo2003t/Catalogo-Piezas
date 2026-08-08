@@ -116,8 +116,9 @@ const productos = [
    { marca:'peugeot', nombre:'Bomba de Aceite TUD5', modelo:['tud5'], tipo:'repuesto', precio:60.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Bomba Aceite TUD5.webp'], descripcion:'Bomba de aceite para motor TUD5. Garantiza la lubricación correcta de todos los componentes internos.', oferta:false, disponible:true },
     { marca:'peugeot', nombre:'Piñón Distribución Cigüeñal DW8', modelo:['dw8'], tipo:'repuesto', precio:30.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Piñon Distribución cigueñal DW8.webp'], descripcion:'Piñón de distribución del cigüeñal para motor DW8. Sincronización perfecta del tren de válvulas.', oferta:false, disponible:true },
     { marca:'peugeot', nombre:'Piñón Distribución Cigüeñal TUD5', modelo:['tud5'], tipo:'repuesto', precio:30.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Piñon Distribución cigueñal TUD5.webp'], descripcion:'Piñón de distribución del cigüeñal para motor TUD5. Sincronización perfecta del tren de válvulas.', oferta:false, disponible:true },
-    { marca:'peugeot', nombre:'Piñón Distribución Cigüeñal XUD9', modelo:['xud9'], tipo:'repuesto', precio:30.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Piñon Distribución cigueñal XUD9.webp'], descripcion:'Piñón de distribución del cigüeñal para motor XUD9. Sincronización perfecta del tren de válvulas.', oferta:false, disponible:true }
-];
+     { marca:'peugeot', nombre:'Piñón Distribución Cigüeñal XUD9', modelo:['xud9'], tipo:'repuesto', precio:30.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Piñon Distribución cigueñal XUD9.webp'], descripcion:'Piñón de distribución del cigüeñal para motor XUD9. Sincronización perfecta del tren de válvulas.', oferta:false, disponible:true },
+     { marca:'peugeot', nombre:'Cigüeñal XUD9 DW8', modelo:['xud9','dw8'], tipo:'repuesto', precio:180.00, precioOriginal:null, imagenes:['Piezas/Peugeot/Cigueñal XUD9 DW8 .webp'], descripcion:'Cigüeñal para motores Peugeot XUD9 y DW8. Pieza central del motor que convierte el movimiento lineal de los pistones en rotación. Forjado en acero aleado con tratamiento térmico para máxima resistencia.', oferta:false, disponible:true }
+ ];
 
 /* ── SLUGS ÚNICOS POR PRODUCTO ──────────────────────────────────
    Necesarios para poder compartir un enlace individual por producto
