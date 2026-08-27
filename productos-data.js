@@ -11,7 +11,7 @@
 const productos = [
    // Varios 
    { marca: 'Varios',nombre: 'Silicona RTV', modelo: ['Motores'], tipo:'Varios', precio: 5.00, precioOriginal: null, imagenes: ['Piezas/Varios/Silicona.webp'], descripcion: 'Silicona RTV de alto rendimiento diseñada para juntas de motores. Resistente a aceites, refrigerantes y temperaturas extremas. Ideal para cárter, tapa de válvulas y bombas de agua.',  oferta: false, disponible: true},
-    { marca:'varios',  nombre:'Pulidora', modelo:['varios'], tipo:'Varios', precio:40.00, precioOriginal:null, imagenes:['Piezas/Varios/Pulidora .webp'], descripcion:'Pulidora eléctrica para diversos trabajos de acabado y mantenimiento.', oferta:false, disponible:true },
+    { marca:'varios',  nombre:'Pulidora', modelo:['varios'], tipo:'Varios', precio:30.00, precioOriginal:40.00, imagenes:['Piezas/Varios/Pulidora .webp'], descripcion:'Pulidora eléctrica para diversos trabajos de acabado y mantenimiento.', oferta:true, disponible:true },
 
   // HYUNDAI
   { marca:'hyundai', nombre:'Filtro de Aceite H100', modelo:['h100'], tipo:'filtro', precio:8.00, precioOriginal:null, imagenes:['Piezas/Hyundai/Filtro de Aceite  H100 (Foto 1).webp','Piezas/Hyundai/Filtro de Aceite  H100 (Foto 2).webp'], descripcion:'Filtro original para Hyundai H100. Máxima protección eliminando impurezas. Compatible con motores diesel y gasolina.', oferta:false, disponible:false },
